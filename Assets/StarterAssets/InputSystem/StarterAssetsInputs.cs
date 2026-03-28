@@ -14,7 +14,10 @@ namespace StarterAssets
 		public bool sprint;
 		public bool Interact;
 		public bool Drop;
-		public bool Throw;
+		public bool Use;
+		public bool slotZero;
+		public bool slotOne;
+		public bool slotTwo;
 
         [Header("Movement Settings")]
 		public bool analogMovement;
@@ -23,80 +26,54 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 
-#if ENABLE_INPUT_SYSTEM
-		public void OnMove(InputValue value)
-		{
-			MoveInput(value.Get<Vector2>());
-		}
+		private PlayerInputAsset inputAction;
+        private void Awake()
+        {
+            inputAction = new PlayerInputAsset();
+        }
 
-		public void OnLook(InputValue value)
-		{
-			if(cursorInputForLook)
+        private void OnEnable()
+        {
+            inputAction.Enable();
+
+			inputAction.Player.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
+			inputAction.Player.Move.canceled += ctx => move = Vector2.zero;
+
+            inputAction.Player.Look.performed += ctx => look = ctx.ReadValue<Vector2>();
+			inputAction.Player.Look.canceled += ctx => look = Vector2.zero;
+
+            inputAction.Player.Jump.performed += ctx => jump = ctx.ReadValueAsButton();
+			inputAction.Player.Jump.canceled += ctx => jump = false;
+
+            inputAction.Player.Sprint.performed += ctx => sprint = ctx.ReadValueAsButton();
+			inputAction.Player.Sprint.canceled += ctx => sprint = false;
+
+			inputAction.Player.Interact.performed += ctx => 
 			{
-				LookInput(value.Get<Vector2>());
-			}
-		}
+                Interact = ctx.ReadValueAsButton();
+            };
+			inputAction.Player.Interact.canceled += ctx => Interact = false;
 
-		public void OnJump(InputValue value)
-		{
-			JumpInput(value.isPressed);
-		}
+			inputAction.Player.Drop.performed += ctx =>
+			{
+                Drop = ctx.ReadValueAsButton();
+            };
+			inputAction.Player.Drop.canceled += ctx => Drop = false;
 
-		public void OnSprint(InputValue value)
-		{
-			SprintInput(value.isPressed);
-		}
+			inputAction.Player.Use.performed += ctx =>
+			{
+                Use = ctx.ReadValueAsButton();
+            };
+			inputAction.Player.Use.canceled += ctx => Use = false;
 
-		public void OnInteract(InputValue value)
-		{
-			InteractInput(value.isPressed);
-		}
+			inputAction.Player.SlotTwo.canceled += ctx => slotTwo = false;
+        }
 
-		public void OnDrop(InputValue value)
-		{
-			DropInput(value.isPressed);
-		}
+        private void OnDisable()
+        {
+            inputAction.Disable();
+        }
 
-		public void OnThrow(InputValue value)
-		{
-            ThrowInput(value.isPressed);
-		}
-#endif
-
-
-		public void MoveInput(Vector2 newMoveDirection)
-		{
-			move = newMoveDirection;
-		} 
-
-		public void LookInput(Vector2 newLookDirection)
-		{
-			look = newLookDirection;
-		}
-
-		public void JumpInput(bool newJumpState)
-		{
-			jump = newJumpState;
-		}
-
-		public void SprintInput(bool newSprintState)
-		{
-			sprint = newSprintState;
-		}
-
-		public void InteractInput(bool newInteractionState)
-		{
-			Interact = newInteractionState;
-		}
-		public void DropInput(bool newDroppingState)
-		{
-			Drop = newDroppingState;
-		}
-		public void ThrowInput(bool newThrowingState)
-		{
-            Throw = newThrowingState;
-		}
-		
 		private void OnApplicationFocus(bool hasFocus)
 		{
 			SetCursorState(cursorLocked);

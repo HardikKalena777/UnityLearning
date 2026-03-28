@@ -74,8 +74,6 @@ namespace StarterAssets
 
 		private const float _threshold = 0.01f;
 
-		private PickUpAndThrow _pickUpAndThrow;
-
         private bool IsCurrentDeviceMouse
 		{
 			get
@@ -99,7 +97,6 @@ namespace StarterAssets
 
 		private void Start()
 		{
-			_pickUpAndThrow = GetComponent<PickUpAndThrow>();
             _controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM
@@ -113,14 +110,14 @@ namespace StarterAssets
 			_fallTimeoutDelta = FallTimeout;
 		}
 
-		private void Update()
-		{
-			JumpAndGravity();
-			GroundedCheck();
-			Move();
-		}
+        private void FixedUpdate()
+        {
+            JumpAndGravity();
+            GroundedCheck();
+            Move();
+        }
 
-		private void LateUpdate()
+        private void LateUpdate()
 		{
 			CameraRotation();
 		}
@@ -157,13 +154,13 @@ namespace StarterAssets
 		private void Move()
 		{
 			// set target speed based on move speed, sprint speed and if sprint is pressed
-			Interactable currentInteractable = _pickUpAndThrow.currentObject != null ? _pickUpAndThrow.currentObject.GetComponent<Interactable>() : null;
+			//Interactable currentInteractable = _pickUpAndThrow.currentObject != null ? _pickUpAndThrow.currentObject.GetComponent<Interactable>() : null;
 
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
-			if (currentInteractable != null)
-			{
-				targetSpeed = targetSpeed / currentInteractable.rb.mass;	// the heavier the object, the slower the player moves
-            }
+			//if (currentInteractable != null)
+			//{
+			//	targetSpeed = targetSpeed / currentInteractable.rb.mass;	// the heavier the object, the slower the player moves
+   //         }
 
 			// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 

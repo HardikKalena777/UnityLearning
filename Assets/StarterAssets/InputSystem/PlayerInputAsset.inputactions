@@ -1,6 +1,6 @@
 {
     "version": 1,
-    "name": "StarterAssets",
+    "name": "PlayerInputAsset",
     "maps": [
         {
             "name": "Player",
@@ -61,9 +61,36 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Throw",
+                    "name": "Use",
                     "type": "Button",
                     "id": "f8758599-429e-422a-9c64-426c411aae17",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SlotZero",
+                    "type": "Button",
+                    "id": "1821ab4b-2ab0-4459-8461-8dac155c24f6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SlotOne",
+                    "type": "Button",
+                    "id": "a0f3da78-799b-4a3c-836e-51ea19a551a8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SlotTwo",
+                    "type": "Button",
+                    "id": "844061f5-5c56-4158-a18d-a359253a34bf",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -276,7 +303,40 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";KeyboardMouse",
-                    "action": "Throw",
+                    "action": "Use",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "40716d9e-7478-42ba-8559-f08fdd0d7102",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SlotZero",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "062426d7-4367-4f04-b619-bd3e693559df",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SlotOne",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2a5fb294-f82f-4e5a-a841-a22e87e47d63",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SlotTwo",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
